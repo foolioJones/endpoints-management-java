@@ -228,6 +228,8 @@ public class ControlFilter implements Filter {
     Stopwatch creationTimer = Stopwatch.createUnstarted(ticker);
     Stopwatch overallTimer = Stopwatch.createStarted(ticker);
 
+
+
     // Perform the check
     AppStruct appInfo = new AppStruct();
     appInfo.httpMethod = ConfigFilter.getRealHttpMethod(httpRequest);
