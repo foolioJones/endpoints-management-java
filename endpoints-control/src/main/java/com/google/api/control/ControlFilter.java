@@ -370,6 +370,9 @@ public class ControlFilter implements Filter {
       apiKey = findDefaultApiKeyParam(request);
     }
 
+    String ipAddress = request.getRemoteAddr();
+    String strippedIpAddress = ipAddress.replace("[", "").replace("]", "");
+    
     return new CheckRequestInfo(new OperationInfo()
         .setApiKey(apiKey)
         .setApiKeyValid(!Strings.isNullOrEmpty(apiKey))
@@ -378,7 +381,7 @@ public class ControlFilter implements Filter {
         .setOperationId(nextOperationId())
         .setOperationName(info.getSelector())
         .setServiceName(serviceName))
-        .setClientIp(request.getRemoteAddr())
+        .setClientIp(strippedIpAddress)
         .setAndroidPackageName(request.getHeader(X_ANDROID_PACKAGE))
         .setAndroidCertificateFingerprint(request.getHeader(X_ANDROID_CERT))
         .setIosBundleId(request.getHeader(X_IOS_BUNDLE_ID));
